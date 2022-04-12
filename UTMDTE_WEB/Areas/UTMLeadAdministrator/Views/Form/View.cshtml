@@ -1,0 +1,123 @@
+﻿
+@{
+    ViewData["Title"] = "View";
+    Layout = "~/Areas/UTMLeadAdministrator/Views/Shared/AppLayout.cshtml";
+}
+
+@model Form
+
+@section stylesheets{
+    <!-- include summernote css -->
+    <link href="/lib/summernote/dist/summernote-bs5.css" rel="stylesheet">
+}
+
+@section breadcrumb {
+<div class="container-fluid">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb my-0 ms-2">
+      <li class="breadcrumb-item">
+        <!-- if breadcrumb is single--><span>Form Manager</span>
+      </li>
+      <li class="breadcrumb-item active"><span>@Model.Title</span></li>
+    </ol>
+  </nav>
+</div>
+}
+
+
+<div class="body flex-grow-1 px-3">
+    <div class="container-lg">
+        <h1 class="text-center">FORM EDITOR</h1>
+        <div class="card">
+            <div class="card-body">
+                <div class="row pt-3 pb-3">
+                    <div class="col">
+                        <a class="btn btn-primary" type="button" href="@Url.Action("Index", "Form", new { area = "UTMLeadAdministrator"})">Back</a>
+                    </div>
+                    <div class="col-3 text-end">
+                        <button class="btn btn-primary" type="button" data-coreui-toggle="modal" data-coreui-target="#FormEditorModal">Edit Form</button>
+                    </div>
+                </div>
+                <div class="text-end pb-3 pt-3">
+                </div>
+                <div class="card p-3">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <tr>
+                                    <th class="w-25">
+                                        Title
+                                    </th>
+                                    <td>
+                                        @Model.Title
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th class="w-25">
+                                        Description
+                                    </th>
+                                    <td>
+                                        @Html.Raw(Model.Description)
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="FormEditorModal" tabindex="-1" aria-labelledby="FormEditorModalTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-xl">
+    <div class="modal-content">
+        <form action="@Url.Action("Update","Form",new { area = "UTMLeadAdministrator" ,id = Model.ID })" method="post">
+          <div class="modal-header">
+            <h5 class="modal-title" id="FormEditorModalTitle">Form Editor</h5>
+            <button class="btn-close" type="button" data-coreui-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="mb-3">
+                <label asp-for="Title" class="form-label"></label>
+                <input asp-for="Title" class="form-control" placeholder="Enter your Title" value="@Model.Title"/>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Description" class="form-label"></label>
+                <textarea asp-for="Description" class="form-control" id="summernote">@Html.Raw(Model.Description)</textarea>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" type="button" data-coreui-dismiss="modal">Close</button>
+            <input class="btn btn-primary" type="submit" value="Save"></input>
+          </div>
+        </form>
+    </div>
+  </div>
+</div>
+
+@section scripts{
+    <!-- include summernote js -->
+    <script src="/lib/summernote/dist/summernote-bs5.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#summernote').summernote({
+                placeholder: 'Enter Your Description',
+                spellCheck: true,
+                tabsize: 2,
+                height: 100,
+                callbacks: {
+		            onInit: function() {
+			            //when inside a modal, re-link the dropdown
+			            var thisNote = $(this);
+
+			            if(thisNote.closest('.modal').length>0){
+				            thisNote.next().find('.dropdown-toggle').dropdown();
+			            }
+
+		            }
+	            }
+            });
+        });
+    </script>
+}

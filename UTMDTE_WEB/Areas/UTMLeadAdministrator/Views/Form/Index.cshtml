@@ -1,0 +1,121 @@
+﻿
+@{
+    ViewData["Title"] = "Form Manager";
+    Layout = "~/Areas/UTMLeadAdministrator/Views/Shared/AppLayout.cshtml";
+}
+
+@model FormViewModel
+
+@section stylesheets{
+    <!-- include summernote css -->
+    <link href="/lib/summernote/dist/summernote-bs5.css" rel="stylesheet">
+}
+
+@section breadcrumb {
+<div class="container-fluid">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb my-0 ms-2">
+      <li class="breadcrumb-item active">
+        <!-- if breadcrumb is single--><span>Form Manager</span>
+      </li>
+    </ol>
+  </nav>
+</div>
+}
+
+<div class="body flex-grow-1 px-3">
+    <div class="container-lg">
+        <h1 class="text-center">FORM MANAGER</h1>
+        <div class="card">
+            <div class="card-body">
+                <div class="row pt-3 pb-3">
+                    <div class="col">
+                        <button class="btn btn-primary" type="button" data-coreui-toggle="modal" data-coreui-target="#FormCreatorModal">Create Form</button>
+                    </div>
+                    <div class="col-3 text-end">
+                        <div class="input-group mb-3"><span class="input-group-text" id="inputGroup-sizing-default"><svg class="icon">
+                        <use xlink:href="/lib/coreui/icons/sprites/free.svg#cil-search"></use>
+                        </svg></span>
+                          <input class="form-control" type="text" placeholder="Search Form" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                        </div>
+                    </div>
+                </div>
+                @*start looping form*@
+                @foreach (var form in Model.Forms!)
+                {
+                <div class="card p-3">
+                    <div class="card-body">
+                        <div class="row form">
+                            <div class="col-8">
+                                <h5 class="card-title">@form.Title</h5>
+                                <p class="card-text">@Html.Raw(form.Description)</p>
+                            </div>
+                            <div class="col-4 text-end">
+                                <div class="list-group text-center" style="display: inline-block">
+                                    <a class="list-group-item list-group-item-action list-group-item-primary" href="@Url.Action("View","Form",new { area = "UTMLeadAdministrator" ,id = form.ID })"> <b>Edit Form Infomartion</b></a>
+                                    <a class="list-group-item list-group-item-action list-group-item-danger" href="@Url.Action("Delete","Form",new { area = "UTMLeadAdministrator" ,id = form.ID })"> <b>Delete Form</b></a>
+                                    <a class="list-group-item list-group-item-action list-group-item-info" href="@Url.Action("Index","Rubric",new { area = "UTMLeadAdministrator" ,formId = form.ID })"> <b>View Rubric</b></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                }
+                @*end looping form*@
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="FormCreatorModal" tabindex="-1" aria-labelledby="FormCreatorModalTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-xl">
+    <div class="modal-content">
+        <form asp-action="Create" asp-controller="Form" asp-area="UTMLeadAdministrator" method="post">
+          <div class="modal-header">
+            <h5 class="modal-title" id="FormCreatorModalTitle">Form Creator</h5>
+            <button class="btn-close" type="button" data-coreui-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="mb-3">
+                <label asp-for="Form.Title" class="form-label"></label>
+                <input asp-for="Form.Title" class="form-control" placeholder="Enter your Title"/>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Form.Description" class="form-label"></label>
+                <textarea asp-for="Form.Description" class="form-control" id="summernote"></textarea>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" type="button" data-coreui-dismiss="modal">Close</button>
+            <input class="btn btn-primary" type="submit" value="Save"></input>
+          </div>
+        </form>
+    </div>
+  </div>
+</div>
+
+@section scripts{
+    <!-- include summernote js -->
+    <script src="/lib/summernote/dist/summernote-bs5.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#summernote').summernote({
+                placeholder: 'Enter Your Description',
+                spellCheck: true,
+                tabsize: 2,
+                height: 100,
+                callbacks: {
+		            onInit: function() {
+			            //when inside a modal, re-link the dropdown
+			            var thisNote = $(this);
+
+			            if(thisNote.closest('.modal').length>0){
+				            thisNote.next().find('.dropdown-toggle').dropdown();
+			            }
+
+		            }
+	            }
+            });
+        });
+    </script>
+}

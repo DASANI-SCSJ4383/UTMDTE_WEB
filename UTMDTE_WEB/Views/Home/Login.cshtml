@@ -1,0 +1,46 @@
+﻿@model LoginViewModel
+
+@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/GuestLayout.cshtml";
+}
+
+<div class="col-lg-8">
+  <div class="card-group d-block d-md-flex row">
+    <div class="card col-md-7 p-4 mb-0">
+      <div class="card-body">
+        <h1>Login</h1>
+        <p class="text-medium-emphasis">Sign In to your account</p>
+        <form asp-controller="Home" asp-action="Login" method="post">
+            <div class="pb-3">
+                <div class="input-group"><span class="input-group-text">
+                    <svg class="icon">
+                      <use xlink:href="/lib/coreui/icons/sprites/free.svg#cil-user"></use>
+                    </svg></span>
+                    <input asp-for="UTMID" class="form-control" placeholder="Enter your UTMID"/>
+                </div>
+                <small><span asp-validation-for="UTMID" class="text-danger"></span></small>
+            </div>
+            <div class="pb-3">
+                <div class="input-group"><span class="input-group-text">
+                    <svg class="icon">
+                      <use xlink:href="/lib/coreui/icons/sprites/free.svg#cil-lock-locked"></use>
+                    </svg></span>
+                    <input asp-for="Password" class="form-control" placeholder="Enter your password"/>
+                </div>
+                <small><span asp-validation-for="Password" class="text-danger"></span></small>
+            </div>
+            <div class="row">
+              <div class="col-6">
+                <button class="btn btn-primary px-4" type="submit">Login</button>
+              </div>
+              <div class="col-6 text-end">
+                <button class="btn btn-link px-0" type="button" onclick="location.href='https://utmid.utm.my/gk/password-reset/';">Forgot password?</button>
+              </div>
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+

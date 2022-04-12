@@ -1,0 +1,168 @@
+﻿
+@{
+    ViewData["Title"] = "Range";
+    Layout = "~/Views/Shared/Template/_App.cshtml";
+}
+
+@section canonical {
+<link rel="canonical" href="https://coreui.io/docs/4.0/components/range/">
+}
+
+@section breadcrumb {
+<div class="container-fluid">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb my-0 ms-2">
+      <li class="breadcrumb-item">
+        <!-- if breadcrumb is single--><a href="#">Home</a>
+      </li>
+      <li class="breadcrumb-item">
+        <!-- if breadcrumb is single--><a href="#">Components</a>
+      </li>
+      <li class="breadcrumb-item">
+        <!-- if breadcrumb is single--><a href="#">Forms</a>
+      </li>
+      <li class="breadcrumb-item active"><span>Range</span></li>
+    </ol>
+  </nav>
+</div>
+}
+
+<div class="body flex-grow-1 px-3">
+<div class="container-lg">
+  <div class="callout callout-info bg-white">CoreUI Range has been created as an extension of Bootstrap Range. Range is delivered with some new features, variants, and unique design that matches CoreUI Design System requirements.<br><br>For more information please visit our official
+    <a href="https://coreui.io/docs/4.1/forms/range/" target="_blank">documentation</a>.
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <div class="card mb-4">
+        <div class="card-header"><strong>Range</strong></div>
+        <div class="card-body">
+          <p class="text-medium-emphasis small">Create custom <code>&lt;input type=&quot;range&quot;&gt;</code> controls with <code>.form-range</code>.</p>
+          <div class="example">
+            <ul class="nav nav-tabs" role="tablist">
+              <li class="nav-item"><a class="nav-link active" data-coreui-toggle="tab" href="#preview-663" role="tab">
+                  <svg class="icon me-2">
+                    <use xlink:href="/lib/coreui/icons/sprites/free.svg#cil-media-play"></use>
+                  </svg>Preview</a></li>
+              <li class="nav-item"><a class="nav-link" data-coreui-toggle="tab" href="#code-663" role="tab">
+                  <svg class="icon me-2">
+                    <use xlink:href="/lib/coreui/icons/sprites/free.svg#cil-code"></use>
+                  </svg>Code</a></li>
+            </ul>
+            <div class="tab-content rounded-bottom">
+              <div class="tab-pane p-3 active preview" role="tabpanel" id="preview-663">
+                <label class="form-label" for="customRange1">Example range</label>
+                <input class="form-range" id="customRange1" type="range">
+              </div>
+              <div class="tab-pane pt-1" role="tabpanel" id="code-663">
+                <script class="language-markup" type="text/plain">
+                  <label class="form-label" for="customRange1">Example range</label>
+                  <input class="form-range" id="customRange1" type="range">
+                </script>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-12">
+      <div class="card mb-4">
+        <div class="card-header"><strong>Range</strong><span class="small ms-1">Disabled</span></div>
+        <div class="card-body">
+          <p class="text-medium-emphasis small">Add the <code>disabled</code> boolean attribute on an input to give it a grayed out appearance and remove pointer events.</p>
+          <div class="example">
+            <ul class="nav nav-tabs" role="tablist">
+              <li class="nav-item"><a class="nav-link active" data-coreui-toggle="tab" href="#preview-996" role="tab">
+                  <svg class="icon me-2">
+                    <use xlink:href="/lib/coreui/icons/sprites/free.svg#cil-media-play"></use>
+                  </svg>Preview</a></li>
+              <li class="nav-item"><a class="nav-link" data-coreui-toggle="tab" href="#code-996" role="tab">
+                  <svg class="icon me-2">
+                    <use xlink:href="/lib/coreui/icons/sprites/free.svg#cil-code"></use>
+                  </svg>Code</a></li>
+            </ul>
+            <div class="tab-content rounded-bottom">
+              <div class="tab-pane p-3 active preview" role="tabpanel" id="preview-996">
+                <label class="form-label" for="disabledRange">Disabled range</label>
+                <input class="form-range" id="disabledRange" type="range" disabled>
+              </div>
+              <div class="tab-pane pt-1" role="tabpanel" id="code-996">
+                <script class="language-markup" type="text/plain">
+                  <label class="form-label" for="disabledRange">Disabled range</label>
+                  <input class="form-range" id="disabledRange" type="range" disabled>
+                </script>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-12">
+      <div class="card mb-4">
+        <div class="card-header"><strong>Range</strong><span class="small ms-1">Min and max</span></div>
+        <div class="card-body">
+          <p class="text-medium-emphasis small">Range inputs have implicit values for <code>min</code> and <code>max</code>— <code>0</code> and <code>100</code>, respectively. You may specify new values for those using the <code>min</code> and <code>max</code> attributes.</p>
+          <div class="example">
+            <ul class="nav nav-tabs" role="tablist">
+              <li class="nav-item"><a class="nav-link active" data-coreui-toggle="tab" href="#preview-142" role="tab">
+                  <svg class="icon me-2">
+                    <use xlink:href="/lib/coreui/icons/sprites/free.svg#cil-media-play"></use>
+                  </svg>Preview</a></li>
+              <li class="nav-item"><a class="nav-link" data-coreui-toggle="tab" href="#code-142" role="tab">
+                  <svg class="icon me-2">
+                    <use xlink:href="/lib/coreui/icons/sprites/free.svg#cil-code"></use>
+                  </svg>Code</a></li>
+            </ul>
+            <div class="tab-content rounded-bottom">
+              <div class="tab-pane p-3 active preview" role="tabpanel" id="preview-142">
+                <label class="form-label" for="customRange2">Example range</label>
+                <input class="form-range" id="customRange2" type="range" min="0" max="5">
+              </div>
+              <div class="tab-pane pt-1" role="tabpanel" id="code-142">
+                <script class="language-markup" type="text/plain">
+                  <label class="form-label" for="customRange2">Example range</label>
+                  <input class="form-range" id="customRange2" type="range" min="0" max="5">
+                </script>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-12">
+      <div class="card mb-4">
+        <div class="card-header"><strong>Range</strong><span class="small ms-1">Steps</span></div>
+        <div class="card-body">
+          <p class="text-medium-emphasis small">By default, range inputs “snap” to integer values. To change this, you can specify a <code>step</code> value. In the example below, we double the number of steps by using <code>step="0.5"</code>.</p>
+          <div class="example">
+            <ul class="nav nav-tabs" role="tablist">
+              <li class="nav-item"><a class="nav-link active" data-coreui-toggle="tab" href="#preview-1027" role="tab">
+                  <svg class="icon me-2">
+                    <use xlink:href="/lib/coreui/icons/sprites/free.svg#cil-media-play"></use>
+                  </svg>Preview</a></li>
+              <li class="nav-item"><a class="nav-link" data-coreui-toggle="tab" href="#code-1027" role="tab">
+                  <svg class="icon me-2">
+                    <use xlink:href="/lib/coreui/icons/sprites/free.svg#cil-code"></use>
+                  </svg>Code</a></li>
+            </ul>
+            <div class="tab-content rounded-bottom">
+              <div class="tab-pane p-3 active preview" role="tabpanel" id="preview-1027">
+                <label class="form-label" for="customRange3">Example range</label>
+                <input class="form-range" id="customRange3" type="range" min="0" max="5" step="0.5">
+              </div>
+              <div class="tab-pane pt-1" role="tabpanel" id="code-1027">
+                <script class="language-markup" type="text/plain">
+                  <label class="form-label" for="customRange3">Example range</label>
+                  <input class="form-range" id="customRange3" type="range" min="0" max="5" step="0.5">
+                </script>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+

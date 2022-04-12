@@ -1,0 +1,237 @@
+﻿
+@{
+    ViewData["Title"] = "Select";
+    Layout = "~/Views/Shared/Template/_App.cshtml";
+}
+
+@section canonical {
+<link rel="canonical" href="https://coreui.io/docs/4.0/components/select/">
+}
+
+@section breadcrumb {
+<div class="container-fluid">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb my-0 ms-2">
+      <li class="breadcrumb-item">
+        <!-- if breadcrumb is single--><a href="#">Home</a>
+      </li>
+      <li class="breadcrumb-item">
+        <!-- if breadcrumb is single--><a href="#">Components</a>
+      </li>
+      <li class="breadcrumb-item">
+        <!-- if breadcrumb is single--><a href="#">Forms</a>
+      </li>
+      <li class="breadcrumb-item active"><span>Select</span></li>
+    </ol>
+  </nav>
+</div>
+}
+
+<div class="body flex-grow-1 px-3">
+<div class="container-lg">
+  <div class="callout callout-info bg-white">CoreUI Select has been created as an extension of Bootstrap Select. Select is delivered with some new features, variants, and unique design that matches CoreUI Design System requirements.<br><br>For more information please visit our official
+    <a href="https://coreui.io/docs/4.1/forms/select/" target="_blank">documentation</a>.
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <div class="card mb-4">
+        <div class="card-header"><strong>Select</strong><span class="small ms-1">Default</span></div>
+        <div class="card-body">
+          <p class="text-medium-emphasis small">Custom <code>&lt;select&gt;</code> menus need only a custom class, <code>.form-select</code> to trigger the custom styles. Custom styles are limited to the <code>&lt;select&gt;</code>’s initial appearance and cannot modify the <code>&lt;option&gt;</code>s due to browser limitations.</p>
+          <div class="example">
+            <ul class="nav nav-tabs" role="tablist">
+              <li class="nav-item"><a class="nav-link active" data-coreui-toggle="tab" href="#preview-438" role="tab">
+                  <svg class="icon me-2">
+                    <use xlink:href="/lib/coreui/icons/sprites/free.svg#cil-media-play"></use>
+                  </svg>Preview</a></li>
+              <li class="nav-item"><a class="nav-link" data-coreui-toggle="tab" href="#code-438" role="tab">
+                  <svg class="icon me-2">
+                    <use xlink:href="/lib/coreui/icons/sprites/free.svg#cil-code"></use>
+                  </svg>Code</a></li>
+            </ul>
+            <div class="tab-content rounded-bottom">
+              <div class="tab-pane p-3 active preview" role="tabpanel" id="preview-438">
+                <select class="form-select" aria-label="Default select example">
+                  <option selected>Open this select menu</option>
+                  <option value="1">One</option>
+                  <option value="2">Two</option>
+                  <option value="3">Three</option>
+                </select>
+              </div>
+              <div class="tab-pane pt-1" role="tabpanel" id="code-438">
+                <script class="language-markup" type="text/plain">
+                  <select class="form-select" aria-label="Default select example">
+                    <option selected>Open this select menu</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                  </select>
+                </script>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-12">
+      <div class="card mb-4">
+        <div class="card-header"><strong>Select</strong><span class="small ms-1">Sizing</span></div>
+        <div class="card-body">
+          <p class="text-medium-emphasis small">You may also choose from small and large custom selects to match our similarly sized text inputs.</p>
+          <div class="example">
+            <ul class="nav nav-tabs" role="tablist">
+              <li class="nav-item"><a class="nav-link active" data-coreui-toggle="tab" href="#preview-359" role="tab">
+                  <svg class="icon me-2">
+                    <use xlink:href="/lib/coreui/icons/sprites/free.svg#cil-media-play"></use>
+                  </svg>Preview</a></li>
+              <li class="nav-item"><a class="nav-link" data-coreui-toggle="tab" href="#code-359" role="tab">
+                  <svg class="icon me-2">
+                    <use xlink:href="/lib/coreui/icons/sprites/free.svg#cil-code"></use>
+                  </svg>Code</a></li>
+            </ul>
+            <div class="tab-content rounded-bottom">
+              <div class="tab-pane p-3 active preview" role="tabpanel" id="preview-359">
+                <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                  <option selected>Open this select menu</option>
+                  <option value="1">One</option>
+                  <option value="2">Two</option>
+                  <option value="3">Three</option>
+                </select>
+                <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                  <option selected>Open this select menu</option>
+                  <option value="1">One</option>
+                  <option value="2">Two</option>
+                  <option value="3">Three</option>
+                </select>
+              </div>
+              <div class="tab-pane pt-1" role="tabpanel" id="code-359">
+                <script class="language-markup" type="text/plain">
+                  <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                    <option selected>Open this select menu</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                  </select>
+                  <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                    <option selected>Open this select menu</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                  </select>
+                </script>
+              </div>
+            </div>
+          </div>
+          <p class="text-medium-emphasis small">The <code>multiple</code> attribute is also supported:</p>
+          <div class="example">
+            <ul class="nav nav-tabs" role="tablist">
+              <li class="nav-item"><a class="nav-link active" data-coreui-toggle="tab" href="#preview-1197" role="tab">
+                  <svg class="icon me-2">
+                    <use xlink:href="/lib/coreui/icons/sprites/free.svg#cil-media-play"></use>
+                  </svg>Preview</a></li>
+              <li class="nav-item"><a class="nav-link" data-coreui-toggle="tab" href="#code-1197" role="tab">
+                  <svg class="icon me-2">
+                    <use xlink:href="/lib/coreui/icons/sprites/free.svg#cil-code"></use>
+                  </svg>Code</a></li>
+            </ul>
+            <div class="tab-content rounded-bottom">
+              <div class="tab-pane p-3 active preview" role="tabpanel" id="preview-1197">
+                <select class="form-select" multiple aria-label="multiple select example">
+                  <option selected>Open this select menu</option>
+                  <option value="1">One</option>
+                  <option value="2">Two</option>
+                  <option value="3">Three</option>
+                </select>
+              </div>
+              <div class="tab-pane pt-1" role="tabpanel" id="code-1197">
+                <script class="language-markup" type="text/plain">
+                  <select class="form-select" multiple aria-label="multiple select example">
+                    <option selected>Open this select menu</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                  </select>
+                </script>
+              </div>
+            </div>
+          </div>
+          <p class="text-medium-emphasis small">As is the <code>size</code> attribute:</p>
+          <div class="example">
+            <ul class="nav nav-tabs" role="tablist">
+              <li class="nav-item"><a class="nav-link active" data-coreui-toggle="tab" href="#preview-423" role="tab">
+                  <svg class="icon me-2">
+                    <use xlink:href="/lib/coreui/icons/sprites/free.svg#cil-media-play"></use>
+                  </svg>Preview</a></li>
+              <li class="nav-item"><a class="nav-link" data-coreui-toggle="tab" href="#code-423" role="tab">
+                  <svg class="icon me-2">
+                    <use xlink:href="/lib/coreui/icons/sprites/free.svg#cil-code"></use>
+                  </svg>Code</a></li>
+            </ul>
+            <div class="tab-content rounded-bottom">
+              <div class="tab-pane p-3 active preview" role="tabpanel" id="preview-423">
+                <select class="form-select" size="3" aria-label="size 3 select example">
+                  <option selected>Open this select menu</option>
+                  <option value="1">One</option>
+                  <option value="2">Two</option>
+                  <option value="3">Three</option>
+                </select>
+              </div>
+              <div class="tab-pane pt-1" role="tabpanel" id="code-423">
+                <script class="language-markup" type="text/plain">
+                  <select class="form-select" size="3" aria-label="size 3 select example">
+                    <option selected>Open this select menu</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                  </select>
+                </script>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-12">
+      <div class="card mb-4">
+        <div class="card-header"><strong>Select</strong><span class="small ms-1">Disabled</span></div>
+        <div class="card-body">
+          <p class="text-medium-emphasis small">Add the <code>disabled</code> boolean attribute on a select to give it a grayed out appearance and remove pointer events.</p>
+          <div class="example">
+            <ul class="nav nav-tabs" role="tablist">
+              <li class="nav-item"><a class="nav-link active" data-coreui-toggle="tab" href="#preview-679" role="tab">
+                  <svg class="icon me-2">
+                    <use xlink:href="/lib/coreui/icons/sprites/free.svg#cil-media-play"></use>
+                  </svg>Preview</a></li>
+              <li class="nav-item"><a class="nav-link" data-coreui-toggle="tab" href="#code-679" role="tab">
+                  <svg class="icon me-2">
+                    <use xlink:href="/lib/coreui/icons/sprites/free.svg#cil-code"></use>
+                  </svg>Code</a></li>
+            </ul>
+            <div class="tab-content rounded-bottom">
+              <div class="tab-pane p-3 active preview" role="tabpanel" id="preview-679">
+                <select class="form-select" aria-label="Disabled select example" disabled>
+                  <option selected>Open this select menu</option>
+                  <option value="1">One</option>
+                  <option value="2">Two</option>
+                  <option value="3">Three</option>
+                </select>
+              </div>
+              <div class="tab-pane pt-1" role="tabpanel" id="code-679">
+                <script class="language-markup" type="text/plain">
+                  <select class="form-select" aria-label="Disabled select example" disabled>
+                    <option selected>Open this select menu</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                  </select>
+                </script>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+

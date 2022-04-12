@@ -1,0 +1,195 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/UTMLeadAdministrator/Views/Shared/AppLayout.cshtml";
+}
+
+@model RubricViewModel
+
+
+@section breadcrumb {
+<div class="container-fluid">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb my-0 ms-2">
+      <li class="breadcrumb-item active">
+        <!-- if breadcrumb is single--><span>Form Manager</span>
+      </li>
+      <li class="breadcrumb-item active"><span>Rubric Manager</span></li>
+    </ol>
+  </nav>
+</div>
+}
+
+<div class="body flex-grow-1 px-3">
+    <div class="container-lg">
+        <h1 class="text-center">RUBRIC MANAGER</h1>
+        <div class="card">
+            <div class="card-body">
+                <h2 class="text-center">@Model.Form.Title.ToUpper()</h2>
+                <div class="row pt-3 pb-3">
+                    <div class="col">
+                        <a class="btn btn-primary" type="button" href="@Url.Action("Index", "Form", new { area = "UTMLeadAdministrator", id = Model.Form.ID})">Back</a>
+                    </div>
+                    <div class="col text-end">
+                         <button class="btn btn-primary" type="button" data-coreui-toggle="modal" data-coreui-target="#RubricCreatorModal">Add Rubric</button>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead class="table-dark text-center">
+                            <tr>
+                                <th>Description</th>
+                                <th width="30%">Answer(s)</th>
+                                <th width="10%">Rubric Type</th>
+                                <th width="10%">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        @foreach(var rubric in Model.Rubrics)
+                        {
+                            <tr>
+                                <td>@rubric.Description</td>
+                                <td class="text-center align-middle">
+                                @if(rubric.Answers.Count() != 0)
+                                {
+                                    <ul class="list-group">
+                                    @foreach(var answer in rubric.Answers)
+                                    {
+                                        <li class="list-group-item">@answer</li>
+                                    }
+                                    </ul>
+                                }
+                                else
+                                {
+                                    @Html.Raw("No Answers given")
+                                }
+                                </td>
+                                <td class="text-center align-middle">@rubric.RubricType</td>
+                                <td class="text-center align-middle">
+                                    <div class="pb-3">
+                                        <a class="btn btn-info btn-sm" type="button" href="@Url.Action("View", "Rubric", new { area = "UTMLeadAdministrator", id = rubric.ID})">View Rubric</a>
+                                    </div>
+                                    <div class="pb-3">
+                                        <a class="btn btn-danger btn-sm" type="button" href="@Url.Action("Delete", "Rubric", new { area = "UTMLeadAdministrator", id = rubric.ID, formId = rubric.FormID})">Delete Rubric </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*modal for Rubric Creator*@
+<div class="modal fade" id="RubricCreatorModal" tabindex="-1" aria-labelledby="RubricCreatorModalTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-xl">
+    <div class="modal-content">
+        <form action="@Url.Action("Create", "Rubric", new { area = "UTMLeadAdministrator", formId = Model.Form.ID})" method="post">
+          <div class="modal-header">
+            <h5 class="modal-title" id="RubricCreatorModalTitle">Form Creator</h5>
+            <button class="btn-close" type="button" data-coreui-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="mb-3">
+                <label class="form-label" asp-for="Rubric.RubricType"></label><br />
+                @foreach (var rubricType in Model.Rubric.RubricTypes)
+                {
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" asp-for="Rubric.RubricType" value="@rubricType"/>
+                      <label class="form-check-label" asp-for="Rubric.RubricType">@rubricType</label>
+                    </div>
+                }
+            </div>
+            <div class="mb-3">
+                <label class="form-label pl-5" asp-for="Rubric.Description"></label> <br />
+                <textarea class="form-control" asp-for="Rubric.Description" rows="3"></textarea>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" asp-for="Rubric.Answers"></label><br />
+                <div class="table-reseponsive">
+                    <table class="table table-bordered text-center" id="answersTable">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>Answer</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tr>
+                            <td>
+                                <input class="form-control" type="text" asp-for="Rubric.Answers" />
+                            </td>
+                            <td>
+                                <div>
+                                    <button class="btn btn-success btn-sm" id="addAnswer" type="button">
+                                        <svg class="icon">
+                                          <use xlink:href="/lib/coreui/icons/sprites/free.svg#cil-plus"></use>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" type="button" data-coreui-dismiss="modal">Close</button>
+            <input class="btn btn-primary" type="submit" value="Add"></input>
+          </div>
+        </form>
+    </div>
+  </div>
+</div>
+
+@section scripts{
+    <script>
+        var addAnswerBtn = document.getElementById("addAnswer");
+
+        var stringHtmlAnswerElements = `<tr>
+                                            <td>
+                                                <input class="form-control" type="text" data-val="true" data-val-required="The Answer(s) field is required." id="Rubric_Answers" name="Rubric.Answers" value="">
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn-danger btn-sm btn_remove">
+                                                <svg class="icon">
+                                                    <use xlink:href="/lib/coreui/icons/sprites/free.svg#cil-minus"></use>
+                                                </svg>
+                                                </button>
+                                            </td>
+                                        </tr>`
+
+        addAnswerBtn.addEventListener('click', function(){
+            $("#answersTable").append(stringHtmlAnswerElements);
+
+            $(".btn_remove").on("click", function () {
+                $(this).parents("tr").remove();
+            });
+
+            //check chosen rubric type
+            toogleAnswerInputEl($('input[type=radio][name="Rubric.RubricType"]:checked').val());
+        });
+
+        $('input[type=radio][name="Rubric.RubricType"]').change(function() {
+            var currentValue = $(this).val();
+
+            toogleAnswerInputEl(currentValue);
+        });
+
+        function toogleAnswerInputEl(currentValue)
+        {
+            console.log(currentValue);
+            if(currentValue == "Textbox"){
+                $('input[name="Rubric.Answers"]').prop('disabled', true);
+
+            }
+            else{
+                $('input[name="Rubric.Answers"]').prop('disabled', false);
+            }
+        }
+        
+</script>
+}
+
