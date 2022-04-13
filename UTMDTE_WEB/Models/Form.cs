@@ -17,6 +17,8 @@ namespace UTMDTE_WEB.Models
 
         public int? UtmleadAdministratorID { get; set; }
 
+        public string? UtmleadAdministratorName { get; set; }
+
         [BindProperty]
         public List<Rubric>? Rubric { get; set; }
     }

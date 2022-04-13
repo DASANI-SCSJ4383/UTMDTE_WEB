@@ -1,9 +1,14 @@
 ﻿    using Microsoft.AspNetCore.Mvc;
+using System.Text.Json;
 using System.Text.Json.Nodes;
 using UTMDTE.API;
+using UTMDTE_WEB.API;
+using UTMDTE_WEB.Areas.Lecturer.Models;
+using UTMDTE_WEB.Models;
 
 namespace UTMDTE_WEB.Areas.Lecturer.Controllers
 {
+    [Area("Lecturer")]
     public class FormController : Controller
     {
         private readonly RESTFulRequest RESTFulRequest;
@@ -13,7 +18,7 @@ namespace UTMDTE_WEB.Areas.Lecturer.Controllers
             RESTFulRequest = _RESTFulRequest;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> IndexAsync()
         {
             var accessToken = HttpContext.Session.GetString("accessToken");
 
@@ -27,7 +32,7 @@ namespace UTMDTE_WEB.Areas.Lecturer.Controllers
             }
             else
             {
-                response = await RESTFulRequest.GetAsync("lecturer/form", accessToken);
+                response = await RESTFulRequest.GetAsync("lecturer/course", accessToken);
             }
 
             if (response == null)
@@ -40,13 +45,12 @@ namespace UTMDTE_WEB.Areas.Lecturer.Controllers
             else
             {
                 var options = JsonSetting.GetDeserializeSetting();
-                List<Form> forms = JsonSerializer.Deserialize<List<Form>>(response!["forms"]!.ToJsonString(), options);
+                List<Course> courses = JsonSerializer.Deserialize<List<Course>>(response!["courses"]!.ToJsonString(), options)!;
 
-                FormViewModel model = new FormViewModel(new Form(), forms);
+                CourseViewModel modal = new CourseViewModel(courses);
 
-                return View(model);
+                return View(modal);
             }
-            return View();
         }
 
         public IActionResult List(int? FormID)

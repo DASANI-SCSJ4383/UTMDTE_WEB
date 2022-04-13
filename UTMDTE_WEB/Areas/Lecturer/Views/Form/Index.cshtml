@@ -4,6 +4,7 @@
     Layout = "~/Areas/Lecturer/Views/Shared/AppLayout.cshtml";
 }
 
+@model CourseViewModel
 
 @section breadcrumb {
 <div class="container-fluid">
@@ -19,6 +20,9 @@
 
 <div class="body flex-grow-1 px-3">
     <div class="container-lg">
-
+        @foreach (var course in Model.Courses!)
+        {
+            @course.Title
+        }
     </div>
 </div>
