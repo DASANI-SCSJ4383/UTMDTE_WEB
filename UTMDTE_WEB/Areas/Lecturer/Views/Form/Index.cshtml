@@ -4,7 +4,16 @@
     Layout = "~/Areas/Lecturer/Views/Shared/AppLayout.cshtml";
 }
 
-@model CourseViewModel
+@model FormsViewModel
+
+@{
+    int? CurrentFormID = -1;
+
+    if(Model.Course!.Form != null)
+    {
+        CurrentFormID = Model.Course.Form.ID;
+    }
+}
 
 @section breadcrumb {
 <div class="container-fluid">
@@ -13,6 +22,9 @@
       <li class="breadcrumb-item">
         <!-- if breadcrumb is single--><span>Set Form</span>
       </li>
+      <li class="breadcrumb-item">
+        <span>Form List</span>
+      </li>
     </ol>
   </nav>
 </div>
@@ -20,9 +32,37 @@
 
 <div class="body flex-grow-1 px-3">
     <div class="container-lg">
-        @foreach (var course in Model.Courses!)
-        {
-            @course.Title
-        }
+        <h2 class="text-center">@Model.Course!.Code - @Model.Course!.Title!.ToUpper()</h2>
+        <div class="card">
+            <div class="card-body">
+                <div class="pb-3 pt-3">
+                    <a class="btn btn-primary" type="button" href="@Url.Action("Index", "Course", new { area = "Lecturer"})">Back</a>     
+                </div>
+                @foreach (var form in Model.Forms!)
+                {
+                <div class="card mb-3 @(CurrentFormID == form.ID ? "border-success" : null)">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col">
+                            <h5 class="card-title">@form.Title!.ToUpper()</h5>
+                            <p class="card-text">@form.UtmleadAdministratorName!.ToUpper()</p>
+                            </div>
+                            <div class="list-group col-3 d-flex align-content-end text-center">
+                            @if(CurrentFormID == form.ID)
+                            {
+                                <a class="list-group-item list-group-item-action list-group-item-danger" href="@Url.Action("UnsetForm", "Course", new { area = "Lecturer", id = Model.Course!.ID})" role="button">UNSET THIS FORM</a> 
+                            }
+                            else
+                            {     
+                                <a class="list-group-item list-group-item-action list-group-item-primary" href="@Url.Action("SetForm", "Course", new { area = "Lecturer", id = Model.Course!.ID, FormID = form.ID})" role="button">SET THIS FORM</a> 
+                            }
+                                <a class="list-group-item list-group-item-action list-group-item-info" href="@Url.Action("View", "Form", new { area = "Lecturer", CourseID = Model.Course!.ID, id = form.ID})" role="button">MORE DETAIL</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                }
+            </div>
+        </div>
     </div>
 </div>

@@ -1,0 +1,80 @@
+﻿
+@{
+    ViewData["Title"] = "View";
+    Layout = "~/Areas/Lecturer/Views/Shared/AppLayout.cshtml";
+}
+
+@model FormViewModel
+
+@section breadcrumb {
+<div class="container-fluid">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb my-0 ms-2">
+      <li class="breadcrumb-item">
+        <!-- if breadcrumb is single--><span>Set Form</span>
+      </li>
+      <li class="breadcrumb-item">
+        <span>Form List</span>
+      </li>
+      <li class="breadcrumb-item">
+        <span>Form List</span>
+      </li>
+    </ol>
+  </nav>
+</div>
+}
+
+<div class="body flex-grow-1 px-3">
+    <div class="container-lg">
+        <h2 class="text-center">@Model.Form!.Title!.ToUpper()</h2>
+        <div class="card">
+            <div class="card-body">
+                <div class="row pt-3 pb-3">
+                    <div class="col">
+                        <a class="btn btn-primary" type="button" href="@Url.Action("Index", "Form", new { area = "Lecturer", CourseID = Model.CourseID})">Back</a>
+                    </div>
+                    <div class="col text-end">
+                        <a class="btn btn-info" type="button" href="@Url.Action("SetForm", "Course", new { area = "Lecturer", FormID = Model.Form.ID, id = Model.CourseID})">Set This Form</a>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead class="table-dark text-center">
+                            <tr>
+                                <th>Description</th>
+                                <th width="30%">Answer(s)</th>
+                                <th width="10%">Rubric Type</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        @foreach(var rubric in Model.Form.Rubrics!)
+                        {
+                            <tr>
+                                <td>@rubric.Description</td>
+                                <td class="text-center align-middle">
+                                @if(rubric.Answers!.Count() != 0)
+                                {
+                                    <ul class="list-group">
+                                    @foreach(var answer in rubric.Answers!)
+                                    {
+                                        <li class="list-group-item">@answer</li>
+                                    }
+                                    </ul>
+                                }
+                                else
+                                {
+                                    @Html.Raw("No Answers given")
+                                }
+                                </td>
+                                <td class="text-center align-middle">@rubric.RubricType</td>
+                            </tr>
+                        }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

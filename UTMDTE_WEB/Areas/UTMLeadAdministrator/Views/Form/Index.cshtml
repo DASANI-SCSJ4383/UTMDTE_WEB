@@ -26,44 +26,40 @@
 <div class="body flex-grow-1 px-3">
     <div class="container-lg">
         <h1 class="text-center">FORM MANAGER</h1>
-        <div class="card">
-            <div class="card-body">
-                <div class="row pt-3 pb-3">
-                    <div class="col">
-                        <button class="btn btn-primary" type="button" data-coreui-toggle="modal" data-coreui-target="#FormCreatorModal">Create Form</button>
-                    </div>
-                    <div class="col-3 text-end">
-                        <div class="input-group mb-3"><span class="input-group-text" id="inputGroup-sizing-default"><svg class="icon">
-                        <use xlink:href="/lib/coreui/icons/sprites/free.svg#cil-search"></use>
-                        </svg></span>
-                          <input class="form-control" type="text" placeholder="Search Form" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
-                        </div>
-                    </div>
+        <div class="row pt-3 pb-3">
+            <div class="col">
+                <button class="btn btn-primary" type="button" data-coreui-toggle="modal" data-coreui-target="#FormCreatorModal">Create Form</button>
+            </div>
+            <div class="col-3 text-end">
+                <div class="input-group mb-3"><span class="input-group-text" id="inputGroup-sizing-default"><svg class="icon">
+                <use xlink:href="/lib/coreui/icons/sprites/free.svg#cil-search"></use>
+                </svg></span>
+                    <input class="form-control" type="text" placeholder="Search Form" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
                 </div>
-                @*start looping form*@
-                @foreach (var form in Model.Forms!)
-                {
-                <div class="card p-3">
-                    <div class="card-body">
-                        <div class="row form">
-                            <div class="col-8">
-                                <h5 class="card-title">@form.Title</h5>
-                                <p class="card-text">@Html.Raw(form.Description)</p>
-                            </div>
-                            <div class="col-4 text-end">
-                                <div class="list-group text-center" style="display: inline-block">
-                                    <a class="list-group-item list-group-item-action list-group-item-primary" href="@Url.Action("View","Form",new { area = "UTMLeadAdministrator" ,id = form.ID })"> <b>Edit Form Infomartion</b></a>
-                                    <a class="list-group-item list-group-item-action list-group-item-danger" href="@Url.Action("Delete","Form",new { area = "UTMLeadAdministrator" ,id = form.ID })"> <b>Delete Form</b></a>
-                                    <a class="list-group-item list-group-item-action list-group-item-info" href="@Url.Action("Index","Rubric",new { area = "UTMLeadAdministrator" ,formId = form.ID })"> <b>View Rubric</b></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                }
-                @*end looping form*@
             </div>
         </div>
+        @*start looping form*@
+        @foreach (var form in Model.Forms!)
+        {
+        <div class="card p-3">
+            <div class="card-body">
+                <div class="row form">
+                    <div class="col-8">
+                        <h5 class="card-title">@form.Title</h5>
+                        <p class="card-text">@Html.Raw(form.Description)</p>
+                    </div>
+                    <div class="col-4 text-end">
+                        <div class="list-group text-center" style="display: inline-block">
+                            <a class="list-group-item list-group-item-action list-group-item-primary" href="@Url.Action("View","Form",new { area = "UTMLeadAdministrator" ,id = form.ID })"> <b>Edit Form Infomartion</b></a>
+                            <a class="list-group-item list-group-item-action list-group-item-danger" href="@Url.Action("Delete","Form",new { area = "UTMLeadAdministrator" ,id = form.ID })"> <b>Delete Form</b></a>
+                            <a class="list-group-item list-group-item-action list-group-item-info" href="@Url.Action("Index","Rubric",new { area = "UTMLeadAdministrator" ,formId = form.ID })"> <b>View Rubric</b></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        }
+        @*end looping form*@
     </div>
 </div>
 

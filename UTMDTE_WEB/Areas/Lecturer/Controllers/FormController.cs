@@ -18,7 +18,7 @@ namespace UTMDTE_WEB.Areas.Lecturer.Controllers
             RESTFulRequest = _RESTFulRequest;
         }
 
-        public async Task<IActionResult> IndexAsync()
+        public async Task<IActionResult> IndexAsync(int? CourseID)
         {
             var accessToken = HttpContext.Session.GetString("accessToken");
 
@@ -32,7 +32,7 @@ namespace UTMDTE_WEB.Areas.Lecturer.Controllers
             }
             else
             {
-                response = await RESTFulRequest.GetAsync("lecturer/course", accessToken);
+                response = await RESTFulRequest.GetAsync($"lecturer/form/list/{CourseID}", accessToken);
             }
 
             if (response == null)
@@ -45,24 +45,48 @@ namespace UTMDTE_WEB.Areas.Lecturer.Controllers
             else
             {
                 var options = JsonSetting.GetDeserializeSetting();
-                List<Course> courses = JsonSerializer.Deserialize<List<Course>>(response!["courses"]!.ToJsonString(), options)!;
+                List<Form> forms = JsonSerializer.Deserialize<List<Form>>(response!["forms"]!.ToJsonString(), options)!;
+                Course course = JsonSerializer.Deserialize<Course>(response!["course"]!.ToJsonString(), options)!;
 
-                CourseViewModel modal = new CourseViewModel(courses);
+                FormsViewModel modal = new FormsViewModel(forms, course);
 
                 return View(modal);
             }
         }
 
-        public IActionResult List(int? FormID)
+        public async Task<IActionResult> ViewAsync(int? CourseID, int? id)
         {
+            var accessToken = HttpContext.Session.GetString("accessToken");
 
+            JsonNode? response;
+            if (string.IsNullOrEmpty(accessToken))
+            {
+                TempData["AlertType"] = "info";
+                TempData["AlertMessage"] = "Invalid Session. Please Login Again";
 
-            return View();
-        }
+                return RedirectToAction("Logout", "Home", new { area = "" });
+            }
+            else
+            {
+                response = await RESTFulRequest.GetAsync($"lecturer/form/view/{id}", accessToken);
+            }
 
-        public IActionResult Set(int? FormID)
-        {
-            return RedirectToAction("Index");
+            if (response == null)
+            {
+                TempData["AlertType"] = "error";
+                TempData["AlertMessage"] = "Internal Server Error Occur, Please Try Again";
+
+                return Redirect(Request.Headers["Referer"].ToString());
+            }
+            else
+            {
+                var options = JsonSetting.GetDeserializeSetting();
+                Form form = JsonSerializer.Deserialize<Form>(response!["form"]!.ToJsonString(), options)!;
+
+                FormViewModel modal = new FormViewModel(form, CourseID);
+
+                return View(modal);
+            }
         }
     }
 }

@@ -28,41 +28,35 @@
 <div class="body flex-grow-1 px-3">
     <div class="container-lg">
         <h1 class="text-center">FORM EDITOR</h1>
-        <div class="card">
+        <div class="row pt-3 pb-3">
+            <div class="col">
+                <a class="btn btn-primary" type="button" href="@Url.Action("Index", "Form", new { area = "UTMLeadAdministrator"})">Back</a>
+            </div>
+            <div class="col-3 text-end">
+                <button class="btn btn-primary" type="button" data-coreui-toggle="modal" data-coreui-target="#FormEditorModal">Edit Form</button>
+            </div>
+        </div>
+        <div class="card p-3">
             <div class="card-body">
-                <div class="row pt-3 pb-3">
-                    <div class="col">
-                        <a class="btn btn-primary" type="button" href="@Url.Action("Index", "Form", new { area = "UTMLeadAdministrator"})">Back</a>
-                    </div>
-                    <div class="col-3 text-end">
-                        <button class="btn btn-primary" type="button" data-coreui-toggle="modal" data-coreui-target="#FormEditorModal">Edit Form</button>
-                    </div>
-                </div>
-                <div class="text-end pb-3 pt-3">
-                </div>
-                <div class="card p-3">
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-bordered">
-                                <tr>
-                                    <th class="w-25">
-                                        Title
-                                    </th>
-                                    <td>
-                                        @Model.Title
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th class="w-25">
-                                        Description
-                                    </th>
-                                    <td>
-                                        @Html.Raw(Model.Description)
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <tr>
+                            <th class="w-25">
+                                Title
+                            </th>
+                            <td>
+                                @Model.Title
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="w-25">
+                                Description
+                            </th>
+                            <td>
+                                @Html.Raw(Model.Description)
+                            </td>
+                        </tr>
+                    </table>
                 </div>
             </div>
         </div>
