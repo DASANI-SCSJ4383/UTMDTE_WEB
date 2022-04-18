@@ -26,8 +26,13 @@
 
 <div class="body flex-grow-1 px-3">
     <div class="container-lg">
-        <h2 class="text-center">@Model.Form!.Title!.ToUpper()</h2>
-        <div class="card">
+        <div class="card m-3">
+            <div class="card-body">
+                <h2 class="card-title">@Model.Form!.Title!.ToUpper()</h2>
+                <p class="card-text">Description: @Html.Raw(Model.Form.Description)</p>
+            </div>
+        </div>
+        <div class="card m-3">
             <div class="card-body">
                 <div class="row pt-3 pb-3">
                     <div class="col">
@@ -39,34 +44,47 @@
                 </div>
                 <div class="table-responsive">
                     <table class="table table-bordered">
-                        <thead class="table-dark text-center">
-                            <tr>
-                                <th>Description</th>
-                                <th width="30%">Answer(s)</th>
-                                <th width="10%">Rubric Type</th>
-                            </tr>
-                        </thead>
                         <tbody>
                         @foreach(var rubric in Model.Form.Rubrics!)
                         {
                             <tr>
                                 <td>@rubric.Description</td>
                                 <td class="text-center align-middle">
-                                @if(rubric.Answers!.Count() != 0)
+                                @if(rubric.RubricType == "Textbox")
                                 {
-                                    <ul class="list-group">
-                                    @foreach(var answer in rubric.Answers!)
-                                    {
-                                        <li class="list-group-item">@answer</li>
-                                    }
-                                    </ul>
+                                    <textarea class="form-control" rows="3" placeholder="Type your answer here" disabled></textarea>
                                 }
-                                else
+                                else if(rubric.RubricType == "Radio Button")
                                 {
-                                    @Html.Raw("No Answers given")
+                                    @foreach(var (index, answer) in rubric.Answers!.Select((answer, i) => (i, answer)))
+                                    {
+                                        <div class="form-check form-check-inline">
+                                              <input class="form-check-input" id="@($"inlineRadio{index}")" type="radio" name="@($"inlineRadio{index}")" value="@index" disabled>
+                                              <label class="form-check-label" for="@($"inlineRadio{index}")">@answer</label>
+                                        </div>         
+                                    }
+                                }
+                                else if(rubric.RubricType == "Checkbox")
+                                {
+                                    @foreach(var (index, answer) in rubric.Answers!.Select((answer, i) => (i, answer)))
+                                    {
+                                        <div class="form-check form-check-inline">
+                                              <input class="form-check-input" id="@($"inlineCheckbox{index}")" type="checkbox" value="@index" disabled>
+                                              <label class="form-check-label" for="@($"inlineCheckbox{index}")">@answer</label>
+                                        </div>        
+                                    }
+                                }
+                                else if(rubric.RubricType == "Dropdown")
+                                {
+                                    <select class="form-select" aria-label="Default select example">
+                                        <option selected disabled>-- Choose Your Answer --</option>
+                                        @foreach(var (index, answer) in rubric.Answers!.Select((answer, i) => (i, answer)))
+                                        {
+                                            <option value="@index" disabled>@answer</option>  
+                                        }
+                                    </select>
                                 }
                                 </td>
-                                <td class="text-center align-middle">@rubric.RubricType</td>
                             </tr>
                         }
                         </tbody>

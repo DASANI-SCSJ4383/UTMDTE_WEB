@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <Folder Include="Areas\Lecturer\Data\" />
+    <Folder Include="Areas\Student\Data\" />
     <Folder Include="Areas\UTMLeadAdministrator\Data\" />
   </ItemGroup>
 

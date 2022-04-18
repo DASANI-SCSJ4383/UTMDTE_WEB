@@ -179,7 +179,7 @@
       "destination": "wwwroot/lib/summernote/"
     },
     {
-      "library": "fullcalendar@5.10.2",
+      "library": "fullcalendar@5.11.0",
       "destination": "wwwroot/lib/fullcalendar/"
     },
     {
