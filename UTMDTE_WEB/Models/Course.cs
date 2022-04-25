@@ -17,5 +17,7 @@
         public int LecturerID { get; set; }
 
         public int? SessionID { get; set; }
+
+        //test
     }
 }
