@@ -4,8 +4,9 @@ pipeline {
          stage('Build') {
              steps {
                  echo 'Building...'
+                  dir("${WORKSPACE}/scripts") {
                     cat 'cd /var/lib/jenkins/apache-jmeter-5.5/bin/jmeter.sh  sh jmeter.sh -Jjmeter.save.saveservice.output_format=xml -n -t /var/lib/jenkins/test.jmx -l /var/lib/jenkins/report.jtl'
-                   
+                  }
              }
              post {
                  always {
