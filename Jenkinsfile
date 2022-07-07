@@ -5,7 +5,7 @@ pipeline {
              steps {
                  echo 'Building...'
                   dir("${WORKSPACE}/scripts") {
-                    bat 'cd /var/lib/jenkins/apache-jmeter-5.5/bin/jmeter.sh  sh jmeter.sh -Jjmeter.save.saveservice.output_format=xml -n -t /var/lib/jenkins/test.jmx -l /var/lib/jenkins/report.jtl'
+                    bat 'D:/Afiq/Subject/SoftwareConstruction/apache-jmeter-5.5/bin/jmeter.bat -n -t D:/Afiq/Subject/SoftwareConstruction/apache-jmeter-5.5/test.jmx -l D:/Afiq/Subject/SoftwareConstruction/apache-jmeter-5.5/report.jtl'
                   }
              }
              post {
